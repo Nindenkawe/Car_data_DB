@@ -14,8 +14,8 @@ from .models import *
 
 @login_required(login_url='signin')
 @allowed_users(allowed_roles=['Admin'])
-def index(request):
-    return render(request,"ihute/index.html")
+def Dashboard(request):
+    return render(request,"ihute/Dashboard.html")
 
 
 
