@@ -1,0 +1,27 @@
+{% extends 'ihute/index.html' %}
+{% load static %}
+{% block body %}
+<div id="container">
+
+    <div class="container-flex">
+      <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+        <form class="center_form" method="post">
+          {{ form.username.label }}
+          {{ form.username }}
+          {{ form.email.label }}
+          {{ form.email }}
+          {{ form.password1.label }}
+          {{ form.password1 }}
+          {{ form.password2.label }}
+          {{ form.password2 }}
+          {% csrf_token %}
+          {{form.errors}}
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign_Up</button>
+      </form>
+      <a href={% url 'signin' %}>Sign in</a>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock%}
