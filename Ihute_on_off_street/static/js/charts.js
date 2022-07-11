@@ -18,9 +18,12 @@ grd.addColorStop(0, "hsla(167,72%,60%,1)");
 grd.addColorStop(1, "hsla(167,72%,60%,0)");
 
 var oData = {
-  "2020": 5.3,
-  "2021": 30.0,
-  "2022": 38.4,
+    "July": 3.4,
+    "August": 10.3,
+    "September": 15.0,
+    "October": 25.4,
+    "November": 38.4,
+    "December": 58.4,
 };
 
 var valuesRy = [];
@@ -284,3 +287,6 @@ function oMousePos(canvas, evt) {
     y: Math.round(evt.clientY - ClientRect.top)
   }
 }
+
+
+/* Weekly top Services */

@@ -4,6 +4,7 @@ const app = Vue.createApp({
             Overview: true,
             WeeklyTS: false,
             MonthlyIncomeCharts: false,
+            Einsurance: true,
         }
     
     },
@@ -17,6 +18,10 @@ const app = Vue.createApp({
         },
         openMonthlyIncomeCharts(){
             this.MonthlyIncomeCharts = !this.MonthlyIncomeCharts
+                
+        },
+        openEinsurance(){
+            this.Einsurance = !this.Einsurance
                 
         }
 
