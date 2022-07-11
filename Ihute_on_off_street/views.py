@@ -18,7 +18,6 @@ def Dashboard(request):
     return render(request,"ihute/Dashboard.html")
 
 
-
 def register(request):
     form = Registration_Form()
     if request.method == "POST":
