@@ -3,6 +3,7 @@ const app = Vue.createApp({
         return {
             Overview: true,
             WeeklyTS: false,
+            MonthlyIncomeCharts: false,
         }
     
     },
@@ -12,6 +13,10 @@ const app = Vue.createApp({
         },
         openWeklyTopServices(){
             this.WeeklyTS = !this.WeeklyTS
+                
+        },
+        openMonthlyIncomeCharts(){
+            this.MonthlyIncomeCharts = !this.MonthlyIncomeCharts
                 
         }
 

@@ -1,10 +1,10 @@
 @white: #fff;
 @blue: #4b84fe;
-@colorDark: #1b253d;
+@colorDark: #ccc;
 @colorLight: #99a0b0;
 @red: #fa5b67;
 @yellow: #ffbb09;
-@bg: #f5f5fa;
+@bg: #152B39;
 @bgDark: #ede8f0;
 
 * {
@@ -36,7 +36,7 @@ body {
 
 .search-wrap {
 	grid-area: search;
-	background: @white;
+	background: @bg;
 	border-bottom: 1px solid @bgDark;
 	display: flex;
 	align-items: center;
@@ -69,7 +69,7 @@ body {
 				border: 0;
 				
 				&:focus {
-					background: @bg;
+					background: @white;
 				}
 			}
 			
@@ -121,7 +121,7 @@ body {
 	grid-area: menu;
 	padding-bottom: 3em;
 	overflow: auto;
-	background: @white;
+	background: @bg;
 	border-right: 1px solid @bgDark;
 	
 	.user {

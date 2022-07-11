@@ -23,7 +23,7 @@
 	<header class="menu-wrap">
 		<figure class="user">
 			<div class="user-avatar">
-				<img src="https://github.com/account" alt="user Profile">
+				<img src="{% static 'img/dark_blue.png' %}" alt="user Profile">
 			</div>
 			<figcaption>
 				Nindenkawe Amir
@@ -51,9 +51,9 @@
 					</li>
 					
 					<li>
-						<a href="#">
+						<a @click="openMonthlyIncomeCharts" href="#">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.707 19.707L12 13.414l4.461 4.461L14.337 20H20v-5.663l-2.125 2.124L13.414 12l4.461-4.461L20 9.663V4h-5.663l2.124 2.125L12 10.586 5.707 4.293 4.293 5.707 10.586 12l-6.293 6.293z"/></svg>
-							Monthly income charts
+							Annual Growth charts
 						</a>
 					</li>
 				</ul>
@@ -64,13 +64,6 @@
 				
 				<ul>
 					<li>
-						<a href="#" class="active">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"/></svg>
-							Services Overview
-						</a>
-					</li>
-					
-					<li>
 						<a href="#">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13 7L11 7 11 11 7 11 7 13 11 13 11 17 13 17 13 13 17 13 17 11 13 11z"/><path d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10c5.514,0,10-4.486,10-10S17.514,2,12,2z M12,20c-4.411,0-8-3.589-8-8 s3.589-8,8-8s8,3.589,8,8S16.411,20,12,20z"/></svg>
 							Create New Provider
@@ -80,7 +73,7 @@
 					<li>
 						<a href="#">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-1 14H4V9.227l7.335 6.521a1.003 1.003 0 0 0 1.33-.001L20 9.227V18zm0-11.448l-8 7.11-8-7.111V6h16v.552z"/></svg>
-							Messages
+							Requests & Messages
 						</a>
 					</li>
 				</ul>
@@ -123,18 +116,17 @@
 	</header>
 	
 	<main class="content-wrap">
-		<header class="content-head">
-			<h1>Generale Overview</h1>
-				
-			<div class="action">
-				<button>
-					View Income/Service
-				</button>
-			</div>
-		</header>
-		
-		<div class="content">
-			<section v-if="Overview" class="info-boxes">
+		<section class="content">
+			<header class="content-head">
+				<h1>Dashboard Overview</h1>
+					
+				<div class="action">
+					<button>
+						View Income/Service
+					</button>
+				</div>
+			</header>
+			<span V-show="Overview" class="info-boxes">
 				<div class="info-box">
 					<div class="box-icon">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 20V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1zm-2-1H5V5h14v14z"/><path d="M10.381 12.309l3.172 1.586a1 1 0 0 0 1.305-.38l3-5-1.715-1.029-2.523 4.206-3.172-1.586a1.002 1.002 0 0 0-1.305.38l-3 5 1.715 1.029 2.523-4.206z"/></svg>
@@ -142,7 +134,7 @@
 					
 					<div class="box-content">
 						<span class="big">44.51</span>
-						Daily Income ($)
+						Daily Income (Rwf)
 					</div>
 				</div>
 				
@@ -178,20 +170,46 @@
 						Pending Requests
 					</div>
 				</div>
+			</span>
+			<span V-show="WeeklyTS" class="">Weekly top Services </span>
+			<span V-show="MonthlyIncomeCharts" class="">Annual Growth charts
+				<div class="wrapper">
+					<canvas id='c'></canvas>
+					<div class="label"></div>
+				</div>
+			</span>
+		</section>
+		{% comment %} 			
+			<section V-show="WeeklyTS"class="">Weekly top Services
+				<header class="content-head">
+					<h1>Tools</h1>
+						
+					<div class="action">
+						<button>
+							Create new Provider
+						</button>
+					</div>
+				</header>
+				<span V-show="WeeklyTS" class="">Create new Povider </span>
+				<span V-show="WeeklyTS" class="">Requests & Messages</span>
+		 	</section>
+			<section class="">Monthly income charts
+				<header class="content-head">
+					<h1>Services Overview</h1>
+						
+					<div class="action">
+						<button>
+							Refresh  Service Data
+						</button>
+					</div>
+				</header>
+				<span V-show="WeeklyTS" class="">E-Insuarance Services </span>
+				<span V-show="WeeklyTS" class="">E-Parking Services </span>
+				<span V-show="WeeklyTS" class="">Mechanical Services </span>
+				<span V-show="WeeklyTS" class="">Chauffeur for Hire </span>
 			</section>
-			<section v-if="WeeklyTS" class="">Weekly top Services </section>
-{% comment %} 			
-			<section v-if="WeeklyTS"class="">Weekly top Services </section>
-			<section class="">Monthly income charts </section>
-			<section class="">Services Overview </section>
-			<section class="">create new provider </section>
-			<section class="">Messages </section>
-			<section class="">E-Insurance Overview </section>
-			<section class="">E-Parking Overview </section>
-			<section class="">Mechanical Consultacy Overview </section>
-			<section class="">Chauffeur for Hire Overview </section>
 {% endcomment %}
-		</div>
+
 	</main>
 </div>
 {% endblock%}

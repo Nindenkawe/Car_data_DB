@@ -76,3 +76,9 @@ def book_chauffeur(request):
         if submitted in request.GET:
             submitted = True
     return render(request, "ihute/services.html", {'form':form, 'submitted':submitted})   
+
+
+@login_required(login_url='signin')
+@allowed_users(allowed_roles=['Admin'])
+def Test(request):
+    return render(request,"ihute/testcharts.html")

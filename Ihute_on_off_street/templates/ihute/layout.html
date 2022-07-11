@@ -2,16 +2,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <title>IHUTE</title>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet/less" type="text/css" href="{% static 'css/styles.less' %}" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/less@4" ></script>
-      <script src="https://unpkg.com/vue@3"></script>
-
+    <title>IHUTE</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet/less" type="text/css" href="{% static 'css/styles.less' %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static 'css/charts.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/less@4" ></script>
+    <script src="https://unpkg.com/vue@3"></script>
   </head>
   <body>
   <div id="Ihute">
@@ -19,6 +19,6 @@
       {% endblock  %}
   </div>
   <script src="{% static 'js/dashboard.js' %}"></script>
-
+  <script src="{% static 'js/charts.js' %}"></script>
   </body>
 </html>
