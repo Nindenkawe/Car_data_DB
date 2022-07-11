@@ -40,7 +40,7 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("Dashboard"))
         else:
             return redirect(request, "ihute/signin.html",{
                 "message":"invalid credetials."
