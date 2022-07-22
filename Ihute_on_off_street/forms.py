@@ -1,3 +1,4 @@
+from time import time
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Subscriber, Proposed_insucovers, Transaction
@@ -12,13 +13,16 @@ class Registration_Form(UserCreationForm):
 
 
 class rqst_chauffeur(ModelForm):
+    phone_number = forms.IntegerField(required=True)
     location = forms.CharField(required=True)
+    time = forms.TimeField(required=True)
+    
     class Meta:
         model = Subscriber
-        fields =  ['phone_number']
+        fields =  ['phone_number','location','time']
 
 
 class buy_insurance(ModelForm):
-     class Meta:
+    class Meta:
         model = Proposed_insucovers
         fields = "__all__"

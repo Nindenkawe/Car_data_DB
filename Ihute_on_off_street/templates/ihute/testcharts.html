@@ -1,5 +1,10 @@
 {% extends 'ihute/layout.html' %}
 {% load static %}
 {% block body %} 
-
+    <div>
+        <form class="form" method="POST" action="{% url 'book_chauffeur' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+        <form>
+    </div>
 {% endblock %}

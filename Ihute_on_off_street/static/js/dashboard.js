@@ -2,9 +2,9 @@ const app = Vue.createApp({
     data() {
         return {
             Overview: true,
-            WeeklyTS: false,
+            ServicesOverview: true,
             MonthlyIncomeCharts: false,
-            ChauffeurforHire: true,
+            ChauffeurforHire: false,
         }
     
     },
@@ -12,8 +12,8 @@ const app = Vue.createApp({
         openOverview(){
             this.Overview = !this.Overview
         },
-        openWeklyTopServices(){
-            this.WeeklyTS = !this.WeeklyTS
+        openServicesOverview(){
+            this.ServicesOverview = !this.ServicesOverview
                 
         },
         openMonthlyIncomeCharts(){

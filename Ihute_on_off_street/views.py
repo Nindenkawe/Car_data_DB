@@ -1,3 +1,5 @@
+from contextvars import Context
+from distutils.log import error
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -9,13 +11,21 @@ from django.urls import reverse
 from django.shortcuts import redirect, render
 from .decoretors import allowed_users
 from .forms import Registration_Form, rqst_chauffeur
-from .serializers import SubscriberSerializer
+from .serializers import *
 from .models import *
 
 @login_required(login_url='signin')
 @allowed_users(allowed_roles=['Admin'])
 def Dashboard(request):
-    return render(request,"ihute/Dashboard.html")
+    user_name = Subscriber.objects.all()
+    Provider_data = Provider.objects.all()
+    Transaction_data = Transaction.objects.all()
+    context = {
+        "user_name":user_name, 
+        "Transaction_data":Transaction_data, 
+        "Provider_data":Provider_data,
+        }
+    return render(request,"ihute/Dashboard.html", context)
 
 
 def register(request):
@@ -51,33 +61,43 @@ def signout(request):
     return render(request, "ihute/signin.html", {"message":"Signed out"})
 
 
-@api_view(['GET','POST'])
+@api_view(['GET'])
 @login_required(login_url='signin')
 @allowed_users(allowed_roles=['Admin'])
-def get_sub_profile(request, id):
+def get_sub_profile(request, pk):
     try:
-        subscriber = Subscriber.objects.all()
-        profile = Subscriber.objects.get(sub_id = id)
+        profile = Subscriber.objects.get(id = pk)
     except Exception as e:
         raise Http404
-    subscriber = SubscriberSerializer(profile, many=True)
-    return Response(subscriber.data)
+    profile = SubscriberSerializer(profile, many=False)
+    return Response(profile.data)
 
+@api_view(['GET','POST'])
 def book_chauffeur(request): 
     submitted = False
     if request.method == "POST":
         form = rqst_chauffeur(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/Ihute_on_off_street/services?submitted=True')
+            return HttpResponseRedirect('/Ihute_on_off_street/testcharts?submitted=True')
     else:
         form = rqst_chauffeur
         if submitted in request.GET:
             submitted = True
-    return render(request, "ihute/services.html", {'form':form, 'submitted':submitted})   
+    return Response(request, "ihute/testcharts.html", {'form':form, 'submitted':submitted})   
 
 
 @login_required(login_url='signin')
-@allowed_users(allowed_roles=['Admin'])
-def Test(request):
-    return render(request,"ihute/testcharts.html")
+@api_view(['GET','POST'])
+def Buyinsurance(request):
+    if request.method == "POST":
+        insuranceForm = Proposed_insucoversSerializer(data=request.data)
+        if insuranceForm.is_valid():
+            insuranceForm.save()
+    print(request.data)
+    
+    buy_insurance = TransactionSerializer(data=request.data)
+    if buy_insurance.is_valid():
+        buy_insurance.save()
+    Insurance_Premiums = Insurance_Premiums.objects.all()
+    return Response(Insurance_Premiums)

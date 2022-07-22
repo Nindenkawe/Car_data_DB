@@ -102,7 +102,7 @@ class Provider(models.Model):
 	choices=service_offered,)
 	
 	def __str__(self):
-		return f"{self.provider_id}"
+		return f"{self.provider}"
 
 class Proposed_insucovers(models.Model):
 	sub_id = models.OneToOneField(User,
