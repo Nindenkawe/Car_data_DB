@@ -17,14 +17,18 @@ from .models import *
 @login_required(login_url='signin')
 @allowed_users(allowed_roles=['Admin'])
 def Dashboard(request):
-    user_name = Subscriber.objects.all()
+    User = request.user.username
     Provider_data = Provider.objects.all()
     Transaction_data = Transaction.objects.all()
+    AllTransactions = Transaction.objects.count()
+    AllUsers = Subscriber.objects.count()
     context = {
-        "user_name":user_name, 
+        "user_name":User, 
         "Transaction_data":Transaction_data, 
         "Provider_data":Provider_data,
-        }
+        "AllTransactions":AllTransactions,
+        "AllUsers":AllUsers
+    }
     return render(request,"ihute/Dashboard.html", context)
 
 
@@ -72,32 +76,35 @@ def get_sub_profile(request, pk):
     profile = SubscriberSerializer(profile, many=False)
     return Response(profile.data)
 
-@api_view(['GET','POST'])
+@api_view(['POST'])
 def book_chauffeur(request): 
     submitted = False
     if request.method == "POST":
         form = rqst_chauffeur(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/Ihute_on_off_street/testcharts?submitted=True')
+            return Response({"message":"Request sent"})
     else:
         form = rqst_chauffeur
         if submitted in request.GET:
             submitted = True
-    return Response(request, "ihute/testcharts.html", {'form':form, 'submitted':submitted})   
+    return Response(request.POST)   
 
 
 @login_required(login_url='signin')
-@api_view(['GET','POST'])
+@api_view(['POST'])
 def Buyinsurance(request):
     if request.method == "POST":
         insuranceForm = Proposed_insucoversSerializer(data=request.data)
         if insuranceForm.is_valid():
             insuranceForm.save()
-    print(request.data)
+    return Response(request.data)
+
+@login_required(login_url='signin')
+@api_view(['GET'])
+def Getinsurance(request, pk):
+    if request.method == "GET":
+        DBinsurance = Proposed_insucovers.objects.get(sub_id=pk)
+        DBinsurance = Proposed_insucoversSerializer(DBinsurance, many=False)
     
-    buy_insurance = TransactionSerializer(data=request.data)
-    if buy_insurance.is_valid():
-        buy_insurance.save()
-    Insurance_Premiums = Insurance_Premiums.objects.all()
-    return Response(Insurance_Premiums)
+    return Response(DBinsurance.data)

@@ -40,7 +40,7 @@ class Subscriber(models.Model):
 
 
 class Transaction(models.Model):
-	sub_id = models.OneToOneField(User,
+	sub_id = models.ForeignKey(User,
         on_delete=models.CASCADE,
         related_name="Transaction",
         null=True,
@@ -59,7 +59,7 @@ class Transaction(models.Model):
 	('E_Insurance', 'Buy_insurance'),
 	('Mechanical_serv', 'Book_mechanic'),
 	('Chauffeur_4hire', 'Chauffeur_4hire')
-	)	
+	)
 	Transaction_type = models.CharField(
 	max_length=32,
 	choices=Transaction_choice,)
@@ -124,3 +124,6 @@ class Proposed_insucovers(models.Model):
 	Towing_system = models.BooleanField(default=False)
 	accident_hist4thelast2years = models.CharField(max_length=20)
 	was_your_previous_policy_canceled = models.BooleanField(default=False)
+
+	def __str__(self):
+		return f"{self.sub_id}"
