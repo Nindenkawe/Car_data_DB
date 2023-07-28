@@ -1,5 +1,3 @@
-from contextvars import Context
-from distutils.log import error
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -90,7 +88,7 @@ def book_chauffeur(request):
             submitted = True
     return Response(request.POST)   
 
-
+#Implementati the pay insirance button use together with momoApi
 @login_required(login_url='signin')
 @api_view(['POST'])
 def Buyinsurance(request):
@@ -100,6 +98,7 @@ def Buyinsurance(request):
             insuranceForm.save()
     return Response(request.data)
 
+#grabbing insurance data and using it on dashboard(use api and grab csv)
 @login_required(login_url='signin')
 @api_view(['GET'])
 def Getinsurance(request, pk):
