@@ -26,3 +26,8 @@ class buy_insurance(ModelForm):
     class Meta:
         model = Proposed_insucovers
         fields = "__all__"
+
+class  buy_somthing(ModelForm):
+    class Meta:
+        model = Transaction
+        fields = "__all__"
