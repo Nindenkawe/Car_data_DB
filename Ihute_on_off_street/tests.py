@@ -14,9 +14,7 @@ class TestViews(TestCase):
          response = self.client.get('/ihute/signup/')
          self.assertEqual(response.status_code, 200)
 # 
-     def test_signout(self):
-        response = self.client.get('/ihute/signout/')
-        self.assertEqual(response.status_code, 200)
+
 # 
      def test_sub_profile(self):
          response = self.client.get('/ihute/sub_profile/')

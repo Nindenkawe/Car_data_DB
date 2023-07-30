@@ -6,3 +6,4 @@ Lib/
 Scripts/
 *.Vscode
 bin/
+include/
