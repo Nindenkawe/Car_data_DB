@@ -1,9 +1,16 @@
+# Ignore database file
 db.sqlite3
+
+# Compiled Python files
 *.pyc
-lib64*/
+__pycache__/
+
+# Ignore lib folders
 lib*/
 Lib*/
 Scripts*/
 bin*/
 include*/
+
+# Ignore Visual Studio Code settings
 .vscode/
