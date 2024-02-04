@@ -4,6 +4,6 @@ lib64/
 lib/
 Lib/
 Scripts/
-*.Vscode
 bin/
 include/
+.vscode/

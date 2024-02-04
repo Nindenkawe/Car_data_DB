@@ -1,12 +1,12 @@
 # Use the official Python base image
-FROM python:3.9
+FROM python:latest-slim-buster
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /car_db
 
 # Copy the requirements file into the container
 COPY requirements.txt .
