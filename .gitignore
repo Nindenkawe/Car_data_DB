@@ -1,9 +1,9 @@
 db.sqlite3
 *.pyc
-lib64/*
-lib/*
-Lib/*
-Scripts/
-bin/
-include/
+lib64*/
+lib*/
+Lib*/
+Scripts*/
+bin*/
+include*/
 .vscode/
