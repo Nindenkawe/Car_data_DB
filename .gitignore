@@ -11,6 +11,7 @@ Lib*/
 Scripts*/
 bin*/
 include*/
+Lib/
 
 # Ignore Visual Studio Code settings
 .vscode/
